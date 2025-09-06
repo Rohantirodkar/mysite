@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoAI Solutions - AI-Powered Sustainability Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        :root {
+            --primary: #0d7377;
+            --secondary: #14a085;
+            --accent: #52d1dc;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gradient: linear-gradient(135deg, #0d7377 0%, #14a085 50%, #52d1dc 100%);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 115, 119, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23fff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/><circle cx="900" cy="800" r="80" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .floating-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .floating-card p {
+            opacity: 0.9;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--accent);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #6c757d;
+            line-height: 1.6;
+        }
+
+        /* Calculator Section */
+        .calculator-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .calculator-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Calculator styles (embedded from previous artifact) */
+        .carbon-calculator {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #e1e8ed;
+        }
+
+        .calculator-header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .calculator-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+
+        .calculator-input {
+            background: #f8fafb;
+            padding: 2rem;
+            border-right: 1px solid #e1e8ed;
+            overflow-y: auto;
+        }
+
+        .calculator-results {
+            background: white;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .calc-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .calc-section-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-left: 1rem;
+            color: var(--dark);
+        }
+
+        .calc-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--secondary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(20, 160, 133, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(20, 160, 133, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(20, 160, 133, 0.3);
+        }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: var(--dark);
+            color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #6c757d;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 15px;
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            padding: 2rem 0;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Results Display */
+        .results-container {
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #e1e8ed;
+            position: relative;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid #e1e8ed;
+            height: 300px;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content,
+            .about-content,
+            .contact-content,
+            .calculator-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .calculator-input {
+                border-right: none;
+                border-bottom: 1px solid #e1e8ed;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">EcoAI Solutions</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>AI-Powered Sustainability Solutions</h1>
+                <p>Transform your business with intelligent carbon management, automated ESG reporting, and data-driven sustainability insights that drive both environmental impact and business value.</p>
+                <div class="cta-buttons">
+                    <a href="#calculator" class="btn btn-primary">Try Free Calculator</a>
+                    <a href="#contact" class="btn btn-secondary">Schedule Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card">
+                    <h3>850M+</h3>
+                    <p>Tons CO₂ Tracked</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Intelligent Sustainability Platform</h2>
+                <p>Leverage cutting-edge AI to automate your sustainability journey and achieve net-zero goals faster</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Carbon Analytics</h3>
+                    <p>Advanced machine learning algorithms analyze your carbon footprint in real-time, providing actionable insights and predictive modeling for emissions reduction.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Automated ESG Reporting</h3>
+                    <p>Generate comprehensive ESG reports automatically with real-time data integration, ensuring compliance with global sustainability frameworks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Recommendations</h3>
+                    <p>Get personalized, AI-generated recommendations based on your industry, size, and current emissions profile to maximize impact and ROI.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Supply Chain Optimization</h3>
+                    <p>AI-powered supply chain analysis identifies emission hotspots and suggests sustainable alternatives across your entire value chain.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Energy Intelligence</h3>
+                    <p>Optimize energy consumption with predictive analytics, renewable energy planning, and real-time efficiency monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Impact Forecasting</h3>
+                    <p>Scenario modeling and predictive analytics help you plan your sustainability roadmap and track progress toward net-zero goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="calculator-container">
+            <div class="section-header">
+                <h2>Enterprise Carbon Calculator</h2>
+                <p>Get instant insights into your company's carbon footprint with our AI-powered analysis tool</p>
+            </div>
+            
+            <div class="carbon-calculator">
+                <div class="calculator-header">
+                    <h2>Premium AI Carbon Calculator</h2>
+                    <p>Enterprise-Grade Sustainability Analysis • 2025 EPA/DEFRA Standards</p>
+                </div>
+
+                <div class="calculator-content">
+                    <div class="calculator-input">
+                        <div class="calc-section-header">
+                            <div class="calc-icon">📊</div>
+                            <h3>Company Information</h3>
+                        </div>
+
+                        <form id="carbonForm">
+                            <div class="form-section">
+                                <div class="form-section-title">🏢 Basic Information</div>
+                                
+                                <div class="form-group">
+                                    <label for="companyName">Company Name</label>
+                                    <input type="text" id="companyName" name="companyName" value="Sample Corp" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="industry">Industry</label>
+                                    <select id="industry" name="industry" required>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="retail">Retail & Consumer Goods</option>
+                                        <option value="technology" selected>Technology & Software</option>
+                                        <option value="healthcare">Healthcare & Life Sciences</option>
+                                        <option value="finance">Financial Services</option>
+                                        <option value="transportation">Transportation & Logistics</option>
+                                        <option value="food">Food & Beverage</option>
+                                        <option value="construction">Construction & Real Estate</option>
+                                        <option value="energy">Energy & Utilities</option>
+                                        <option value="professional">Professional Services</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="employees">Number of Employees</label>
+                                    <input type="number" id="employees" name="employees" value="75" min="1" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="revenue">Annual Revenue (USD)</label>
+                                    <input type="number" id="revenue" name="revenue" value="5000000" min="0" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="region">Geographic Region</label>
+                                    <select id="region" name="region" required>
+                                        <option value="us_average" selected>United States (Average)</option>
+                                        <option value="california">California (CAMX)</option>
+                                        <option value="texas">Texas (ERCT)</option>
+                                        <option value="northeast">Northeast (ISO-NE)</option>
+                                        <option value="midwest">Midwest (MISO)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <div class="form-section-title">⚡ Scope 1 & 2 Emissions</div>
+                                
+                                <div class="form-group">
+                                    <label for="electricity">Monthly Electricity Consumption (kWh)</label>
+                                    <input type="number" id="electricity" name="electricity" value="8500" min="0" step="0.1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="naturalGas">Monthly Natural Gas (MMBtu)</label>
+                                    <input type="number" id="naturalGas" name="naturalGas" value="120" min="0" step="0.1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="diesel">Annual Diesel Fuel (MMBtu)</label>
+                                    <input type="number" id="diesel" name="diesel" value="25" min="0" step="0.1">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gasoline">Annual Gasoline (MMBtu)</label>
+                                    <input type="number" id="gasoline" name="gasoline" value="45" min="0" step="0.1">
+                                </div>
+                            </div>
+
+                            <div class="form
