@@ -3,60 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoAI Solutions - AI-Powered Sustainability Platform</title>
+    <title>EcoAI - Enterprise Sustainability Intelligence Platform</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        :root {
-            --primary: #0d7377;
-            --secondary: #14a085;
-            --accent: #52d1dc;
-            --dark: #212529;
-            --light: #f8f9fa;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
-            --gradient: linear-gradient(135deg, #0d7377 0%, #14a085 50%, #52d1dc 100%);
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-green: #0d7377;
+            --secondary-green: #14a085;
+            --accent-blue: #329da8;
+            --light-green: #a4c3a2;
+            --dark-navy: #1a2332;
+            --warm-white: #fafcfc;
+            --soft-gray: #e8f0f2;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --gradient-primary: linear-gradient(135deg, #0d7377 0%, #14a085 50%, #329da8 100%);
+            --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: var(--dark);
+            color: var(--text-dark);
             overflow-x: hidden;
         }
 
         /* Navigation */
-        nav {
+        .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(13, 115, 119, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(26, 35, 50, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
-            color: white;
+            color: var(--secondary-green);
             text-decoration: none;
         }
 
@@ -71,28 +72,37 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
-            cursor: pointer;
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--secondary-green);
         }
 
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
+        .cta-button {
+            background: var(--gradient-primary);
             color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(13, 115, 119, 0.3);
         }
 
         /* Hero Section */
         .hero {
-            background: var(--gradient);
             min-height: 100vh;
+            background: var(--gradient-secondary);
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
             position: relative;
             overflow: hidden;
         }
@@ -104,118 +114,90 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23fff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23fff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/><circle cx="900" cy="800" r="80" fill="url(%23a)"/></svg>');
-            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g1" cx="50" cy="50" r="50"><stop offset="0" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="1" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="20" cy="20" r="20" fill="url(%23g1)"/><circle cx="80" cy="30" r="15" fill="url(%23g1)"/><circle cx="30" cy="80" r="25" fill="url(%23g1)"/><circle cx="70" cy="70" r="18" fill="url(%23g1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            max-width: 800px;
             position: relative;
             z-index: 1;
         }
 
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
         }
 
-        .hero-text p {
-            font-size: 1.3rem;
-            color: rgba(255,255,255,0.9);
+        .hero-subtitle {
+            font-size: 1.5rem;
             margin-bottom: 2rem;
-            line-height: 1.6;
+            opacity: 0.9;
+            font-weight: 300;
         }
 
-        .cta-buttons {
+        .hero-cta {
             display: flex;
             gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .btn {
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
-            font-weight: 600;
             font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(13, 115, 119, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .floating-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            color: white;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .floating-card h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .floating-card p {
-            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
         }
 
         /* Features Section */
         .features {
-            padding: 5rem 0;
-            background: var(--light);
+            padding: 6rem 2rem;
+            background: var(--warm-white);
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .section-header {
@@ -223,177 +205,123 @@
             margin-bottom: 4rem;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark);
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
 
-        .section-header p {
-            font-size: 1.2rem;
-            color: #6c757d;
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
+            margin-top: 4rem;
         }
 
         .feature-card {
             background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s ease;
-            border-top: 4px solid var(--accent);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--secondary-green);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
-        .feature-card h3 {
+        .feature-title {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--text-dark);
             margin-bottom: 1rem;
         }
 
-        .feature-card p {
-            color: #6c757d;
-            line-height: 1.6;
+        .feature-description {
+            color: var(--text-light);
+            line-height: 1.7;
         }
 
         /* Calculator Section */
         .calculator-section {
-            padding: 5rem 0;
-            background: white;
+            padding: 6rem 2rem;
+            background: var(--soft-gray);
         }
 
         .calculator-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Calculator styles (embedded from previous artifact) */
-        .carbon-calculator {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-radius: 30px;
             overflow: hidden;
-            border: 1px solid #e1e8ed;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
 
         .calculator-header {
-            background: var(--gradient);
+            background: var(--gradient-primary);
             color: white;
-            padding: 2rem;
+            padding: 3rem;
             text-align: center;
         }
 
-        .calculator-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .calculator-header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .calculator-content {
+        .calculator-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 600px;
+            min-height: 800px;
         }
 
-        .calculator-input {
-            background: #f8fafb;
-            padding: 2rem;
-            border-right: 1px solid #e1e8ed;
-            overflow-y: auto;
+        .input-panel {
+            padding: 3rem;
+            background: var(--warm-white);
+            border-right: 1px solid var(--soft-gray);
         }
 
-        .calculator-results {
+        .results-panel {
+            padding: 3rem;
             background: white;
-            padding: 2rem;
-            overflow-y: auto;
         }
 
-        .calc-section-header {
+        .panel-header {
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             padding-bottom: 1rem;
-            border-bottom: 3px solid var(--secondary);
+            border-bottom: 3px solid var(--secondary-green);
         }
 
-        .calc-section-header h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-left: 1rem;
-            color: var(--dark);
-        }
-
-        .calc-icon {
-            width: 35px;
-            height: 35px;
-            background: var(--secondary);
-            border-radius: 10px;
+        .panel-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-green);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
             color: white;
-            font-size: 1.2rem;
         }
 
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(20, 160, 133, 0.1);
+        .panel-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
         }
 
         .form-section {
@@ -401,286 +329,61 @@
         }
 
         .form-section-title {
-            font-size: 1rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            padding: 0.75rem;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            padding: 1rem;
             background: rgba(20, 160, 133, 0.1);
-            border-radius: 8px;
-            border-left: 4px solid var(--secondary);
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-green);
         }
 
-        .calculate-btn {
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
             width: 100%;
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
+            border: 2px solid var(--soft-gray);
             border-radius: 10px;
             font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(20, 160, 133, 0.3);
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-green);
+            box-shadow: 0 0 0 4px rgba(20, 160, 133, 0.1);
         }
 
-        /* About Section */
-        .about {
-            padding: 5rem 0;
-            background: var(--dark);
+        .analyze-button {
+            width: 100%;
+            background: var(--gradient-primary);
             color: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
-            background: var(--light);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
+            border: none;
+            padding: 1.2rem;
             border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .service-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-right: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .service-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            color: #6c757d;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .service-features li:before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-form {
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .contact-form h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info {
-            padding: 2rem 0;
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin-right: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
             font-size: 1.2rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
         }
 
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            line-height: 1.8;
-        }
-
-        .footer-section a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
-        }
-
-        /* Loading Overlay */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            color: white;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            text-align: center;
+        .analyze-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(13, 115, 119, 0.3);
         }
 
         /* Results Display */
@@ -690,138 +393,329 @@
 
         .results-container.active {
             display: block;
-            animation: fadeIn 0.5s ease;
+            animation: slideIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .metric-card {
-            background: linear-gradient(135deg, white, #f8f9fa);
+            background: linear-gradient(135deg, white, #f8fafb);
             padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            border: 1px solid #e1e8ed;
-            position: relative;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--secondary);
+            border-radius: 15px;
+            border-left: 4px solid var(--secondary-green);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .metric-value {
             font-size: 2rem;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--primary-green);
             margin-bottom: 0.5rem;
         }
 
         .metric-label {
-            font-size: 1rem;
-            color: #6c757d;
+            color: var(--text-light);
             font-weight: 500;
         }
 
         .chart-container {
             background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 1rem 0;
-            border: 1px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             height: 300px;
         }
 
         .chart-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 1rem;
             text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .recommendations-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .recommendation-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-blue);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .recommendation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-title {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .impact-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .impact-high { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+        .impact-medium { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+        .impact-low { background: rgba(34, 197, 94, 0.1); color: #059669; }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--warm-white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--secondary-green);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .service-description {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--secondary-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, 
+        .footer-section ul {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul a:hover {
+            color: var(--secondary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 35, 50, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(20, 160, 133, 0.3);
+            border-top: 4px solid var(--secondary-green);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .loading-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-text p {
+            opacity: 0.8;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content,
-            .about-content,
-            .contact-content,
-            .calculator-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .calculator-input {
-                border-right: none;
-                border-bottom: 1px solid #e1e8ed;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .calculator-grid { grid-template-columns: 1fr; }
+            .input-panel { border-right: none; border-bottom: 1px solid var(--soft-gray); }
+            .nav-links { display: none; }
+            .section-title { font-size: 2.2rem; }
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        /* Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">EcoAI Solutions</a>
+            <a href="#" class="logo">🌱 EcoAI</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
+                <li><a href="#features">Platform</a></li>
                 <li><a href="#calculator">Calculator</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn">☰</button>
+            <a href="#calculator" class="cta-button">Start Analysis</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>AI-Powered Sustainability Solutions</h1>
-                <p>Transform your business with intelligent carbon management, automated ESG reporting, and data-driven sustainability insights that drive both environmental impact and business value.</p>
-                <div class="cta-buttons">
-                    <a href="#calculator" class="btn btn-primary">Try Free Calculator</a>
-                    <a href="#contact" class="btn btn-secondary">Schedule Demo</a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="floating-card">
-                    <h3>850M+</h3>
-                    <p>Tons CO₂ Tracked</p>
-                </div>
+        <div class="hero-content fade-in-up">
+            <h1>AI-Powered Sustainability Intelligence</h1>
+            <p class="hero-subtitle">Transform your business with comprehensive carbon analysis, predictive insights, and automated compliance reporting for the net-zero economy.</p>
+            <div class="hero-cta">
+                <a href="#calculator" class="btn-primary">Analyze Your Footprint</a>
+                <a href="#services" class="btn-secondary">Explore Platform</a>
             </div>
         </div>
     </section>
@@ -830,39 +724,45 @@
     <section id="features" class="features">
         <div class="container">
             <div class="section-header">
-                <h2>Intelligent Sustainability Platform</h2>
-                <p>Leverage cutting-edge AI to automate your sustainability journey and achieve net-zero goals faster</p>
+                <h2 class="section-title">Enterprise Sustainability Platform</h2>
+                <p class="section-subtitle">Harness the power of AI to drive measurable environmental impact and unlock sustainable competitive advantages</p>
             </div>
+            
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Carbon Analytics</h3>
-                    <p>Advanced machine learning algorithms analyze your carbon footprint in real-time, providing actionable insights and predictive modeling for emissions reduction.</p>
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">🤖</span>
+                    <h3 class="feature-title">AI-Driven Analytics</h3>
+                    <p class="feature-description">Advanced machine learning algorithms analyze your carbon data, identify emission patterns, and predict future environmental impact with 95% accuracy.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Automated ESG Reporting</h3>
-                    <p>Generate comprehensive ESG reports automatically with real-time data integration, ensuring compliance with global sustainability frameworks.</p>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="feature-title">Real-Time Monitoring</h3>
+                    <p class="feature-description">Live dashboard tracking across all emission scopes with automated data collection from IoT sensors and enterprise systems.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Smart Recommendations</h3>
-                    <p>Get personalized, AI-generated recommendations based on your industry, size, and current emissions profile to maximize impact and ROI.</p>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Predictive Optimization</h3>
+                    <p class="feature-description">AI recommendations that automatically optimize operations to reduce emissions while maintaining productivity and profitability.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌱</div>
-                    <h3>Supply Chain Optimization</h3>
-                    <p>AI-powered supply chain analysis identifies emission hotspots and suggests sustainable alternatives across your entire value chain.</p>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">📋</span>
+                    <h3 class="feature-title">Compliance Automation</h3>
+                    <p class="feature-description">Automated ESG reporting for SEC, CSRD, TCFD, and other regulatory frameworks with audit-ready documentation.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Energy Intelligence</h3>
-                    <p>Optimize energy consumption with predictive analytics, renewable energy planning, and real-time efficiency monitoring.</p>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">🌐</span>
+                    <h3 class="feature-title">Supply Chain Intelligence</h3>
+                    <p class="feature-description">End-to-end supply chain carbon tracking with supplier scorecards and procurement optimization recommendations.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Impact Forecasting</h3>
-                    <p>Scenario modeling and predictive analytics help you plan your sustainability roadmap and track progress toward net-zero goals.</p>
+                
+                <div class="feature-card fade-in-up">
+                    <span class="feature-icon">💰</span>
+                    <h3 class="feature-title">Financial Impact Analysis</h3>
+                    <p class="feature-description">Carbon cost modeling, ESG investment analysis, and ROI projections for sustainability initiatives and carbon offsetting strategies.</p>
                 </div>
             </div>
         </div>
@@ -870,39 +770,39 @@
 
     <!-- Calculator Section -->
     <section id="calculator" class="calculator-section">
-        <div class="calculator-container">
+        <div class="container">
             <div class="section-header">
-                <h2>Enterprise Carbon Calculator</h2>
-                <p>Get instant insights into your company's carbon footprint with our AI-powered analysis tool</p>
+                <h2 class="section-title">Enterprise Carbon Intelligence</h2>
+                <p class="section-subtitle">Get instant AI-powered analysis of your carbon footprint with industry benchmarking and actionable optimization strategies</p>
             </div>
             
-            <div class="carbon-calculator">
+            <div class="calculator-container">
                 <div class="calculator-header">
-                    <h2>Premium AI Carbon Calculator</h2>
-                    <p>Enterprise-Grade Sustainability Analysis • 2025 EPA/DEFRA Standards</p>
+                    <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">🌍 AI Carbon Calculator</h3>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">Enterprise-Grade Sustainability Analysis • 2025 EPA/DEFRA Standards</p>
                 </div>
-
-                <div class="calculator-content">
-                    <div class="calculator-input">
-                        <div class="calc-section-header">
-                            <div class="calc-icon">📊</div>
-                            <h3>Company Information</h3>
+                
+                <div class="calculator-grid">
+                    <div class="input-panel">
+                        <div class="panel-header">
+                            <div class="panel-icon">📊</div>
+                            <h3 class="panel-title">Company Analysis</h3>
                         </div>
-
+                        
                         <form id="carbonForm">
                             <div class="form-section">
                                 <div class="form-section-title">🏢 Basic Information</div>
                                 
                                 <div class="form-group">
                                     <label for="companyName">Company Name</label>
-                                    <input type="text" id="companyName" name="companyName" value="Sample Corp" required>
+                                    <input type="text" id="companyName" name="companyName" value="TechCorp Industries" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="industry">Industry</label>
+                                    <label for="industry">Industry Sector</label>
                                     <select id="industry" name="industry" required>
                                         <option value="manufacturing">Manufacturing</option>
-                                        <option value="retail">Retail & Consumer Goods</option>
+                                        <option value="retail">Retail & Consumer</option>
                                         <option value="technology" selected>Technology & Software</option>
                                         <option value="healthcare">Healthcare & Life Sciences</option>
                                         <option value="finance">Financial Services</option>
@@ -916,48 +816,497 @@
 
                                 <div class="form-group">
                                     <label for="employees">Number of Employees</label>
-                                    <input type="number" id="employees" name="employees" value="75" min="1" required>
+                                    <input type="number" id="employees" name="employees" value="150" min="1" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="revenue">Annual Revenue (USD)</label>
-                                    <input type="number" id="revenue" name="revenue" value="5000000" min="0" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="region">Geographic Region</label>
-                                    <select id="region" name="region" required>
-                                        <option value="us_average" selected>United States (Average)</option>
-                                        <option value="california">California (CAMX)</option>
-                                        <option value="texas">Texas (ERCT)</option>
-                                        <option value="northeast">Northeast (ISO-NE)</option>
-                                        <option value="midwest">Midwest (MISO)</option>
-                                    </select>
+                                    <input type="number" id="revenue" name="revenue" value="15000000" min="0" required>
                                 </div>
                             </div>
 
                             <div class="form-section">
-                                <div class="form-section-title">⚡ Scope 1 & 2 Emissions</div>
+                                <div class="form-section-title">⚡ Energy & Operations</div>
                                 
                                 <div class="form-group">
-                                    <label for="electricity">Monthly Electricity Consumption (kWh)</label>
-                                    <input type="number" id="electricity" name="electricity" value="8500" min="0" step="0.1">
+                                    <label for="electricity">Monthly Electricity (kWh)</label>
+                                    <input type="number" id="electricity" name="electricity" value="25000" min="0" step="0.1">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="naturalGas">Monthly Natural Gas (MMBtu)</label>
-                                    <input type="number" id="naturalGas" name="naturalGas" value="120" min="0" step="0.1">
+                                    <input type="number" id="naturalGas" name="naturalGas" value="180" min="0" step="0.1">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="diesel">Annual Diesel Fuel (MMBtu)</label>
-                                    <input type="number" id="diesel" name="diesel" value="25" min="0" step="0.1">
+                                    <label for="businessTravel">Annual Business Travel (km)</label>
+                                    <input type="number" id="businessTravel" name="businessTravel" value="450000" min="0">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="gasoline">Annual Gasoline (MMBtu)</label>
-                                    <input type="number" id="gasoline" name="gasoline" value="45" min="0" step="0.1">
+                                    <label for="employeeCommute">Employee Commuting (km/person/year)</label>
+                                    <input type="number" id="employeeCommute" name="employeeCommute" value="3000" min="0">
                                 </div>
                             </div>
 
-                            <div class="form
+                            <button type="button" class="analyze-button" onclick="runAnalysis()">
+                                🚀 Generate AI Analysis
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="results-panel">
+                        <div class="panel-header">
+                            <div class="panel-icon">📈</div>
+                            <h3 class="panel-title">Intelligence Report</h3>
+                        </div>
+                        
+                        <div id="analysisPlaceholder" style="text-align: center; padding: 3rem; color: var(--text-light);">
+                            <div style="font-size: 4rem; margin-bottom: 1rem;">🎯</div>
+                            <h3 style="margin-bottom: 1rem;">AI-Powered Carbon Analysis</h3>
+                            <p>Enter your company data to receive comprehensive sustainability insights with industry benchmarking and optimization recommendations.</p>
+                        </div>
+                        
+                        <div id="resultsContainer" class="results-container">
+                            <div id="keyMetrics" class="metric-grid"></div>
+                            
+                            <div class="chart-container">
+                                <div class="chart-title">Emissions Breakdown by Scope</div>
+                                <canvas id="emissionsChart"></canvas>
+                            </div>
+                            
+                            <div class="recommendations" id="recommendationsSection">
+                                <div class="recommendations-title">🤖 AI Optimization Strategies</div>
+                                <div id="recommendationsList"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Enterprise Solutions</h2>
+                <p class="section-subtitle">Comprehensive sustainability services powered by artificial intelligence and deep industry expertise</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🏭</span>
+                    <h3 class="service-title">Carbon Management Platform</h3>
+                    <p class="service-description">Complete lifecycle carbon accounting with automated data collection and real-time optimization.</p>
+                    <ul class="service-features">
+                        <li>Automated Scope 1, 2 & 3 tracking</li>
+                        <li>Real-time emissions monitoring</li>
+                        <li>Predictive analytics & forecasting</li>
+                        <li>Regulatory compliance automation</li>
+                        <li>Supply chain carbon intelligence</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3 class="service-title">ESG Reporting & Analytics</h3>
+                    <p class="service-description">Automated ESG reporting with AI-driven insights for stakeholder communications.</p>
+                    <ul class="service-features">
+                        <li>SEC Climate Disclosure compliance</li>
+                        <li>CSRD & TCFD reporting</li>
+                        <li>Stakeholder dashboards</li>
+                        <li>Materiality assessments</li>
+                        <li>Performance benchmarking</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Learn More</a>
+                </div>
+                
+                <div class="service-card">
+                    <span class="service-icon">🎯</span>
+                    <h3 class="service-title">Net-Zero Strategy</h3>
+                    <p class="service-description">Science-based target setting with AI-optimized decarbonization roadmaps.</p>
+                    <ul class="service-features">
+                        <li>Science-based target validation</li>
+                        <li>Decarbonization pathway modeling</li>
+                        <li>Investment prioritization</li>
+                        <li>Carbon offset optimization</li>
+                        <li>Progress tracking & reporting</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EcoAI Platform</h3>
+                    <p>Leading enterprise sustainability intelligence platform powered by artificial intelligence. Transform your business for the net-zero economy.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Solutions</h3>
+                    <ul>
+                        <li><a href="#calculator">Carbon Calculator</a></li>
+                        <li><a href="#services">Platform Overview</a></li>
+                        <li><a href="#services">ESG Reporting</a></li>
+                        <li><a href="#services">Net-Zero Strategy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>📧 hello@ecoai-platform.com</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>🏢 San Francisco, CA</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcoAI Platform. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div>
+            <div class="loading-spinner"></div>
+            <div class="loading-text">
+                <h3>AI is analyzing your carbon footprint...</h3>
+                <p>Processing emission factors and industry benchmarks</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 2025 Updated Emission Factors (kg CO2e per unit)
+        const emissionFactors = {
+            // Scope 1 - Direct emissions
+            naturalGas: 54.4, // per MMBtu
+            diesel: 74.1, // per MMBtu  
+            gasoline: 69.8, // per MMBtu
+            
+            // Scope 2 - Electricity (US average)
+            electricity: 0.355, // per kWh
+            
+            // Scope 3 - Indirect emissions
+            businessTravel: 0.105, // per passenger-km (average)
+            employeeCommute: 0.21, // per km (average car)
+            waste: 1.180, // per short ton to landfill
+            purchasedGoods: 0.8 // per USD spent (proxy)
+        };
+
+        // Industry benchmarks (tCO2e per employee per year)
+        const industryBenchmarks = {
+            manufacturing: 28.5,
+            retail: 4.5,
+            technology: 3.2,
+            healthcare: 12.8,
+            finance: 3.8,
+            transportation: 45.2,
+            food: 22.1,
+            construction: 35.7,
+            energy: 65.4,
+            professional: 5.1
+        };
+
+        let currentAnalysis = null;
+        let emissionsChart = null;
+
+        function runAnalysis() {
+            // Show loading overlay
+            document.getElementById('loadingOverlay').classList.add('active');
+            document.getElementById('analysisPlaceholder').style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(document.getElementById('carbonForm'));
+            const data = Object.fromEntries(formData.entries());
+            
+            // Convert strings to numbers where needed
+            Object.keys(data).forEach(key => {
+                if (key !== 'companyName' && key !== 'industry') {
+                    data[key] = parseFloat(data[key]) || 0;
+                }
+            });
+
+            // Simulate AI processing delay
+            setTimeout(() => {
+                // Calculate emissions
+                const analysis = calculateEmissions(data);
+                currentAnalysis = analysis;
+                
+                // Display results
+                displayResults(analysis, data);
+                
+                // Hide loading
+                document.getElementById('loadingOverlay').classList.remove('active');
+                document.getElementById('resultsContainer').classList.add('active');
+            }, 3500);
+        }
+
+        function calculateEmissions(data) {
+            // Scope 1 calculations (direct emissions)
+            const scope1 = {
+                naturalGas: (data.naturalGas * 12 * emissionFactors.naturalGas) / 1000 // tons/year
+            };
+            
+            // Scope 2 calculations (electricity)
+            const scope2 = {
+                electricity: (data.electricity * 12 * emissionFactors.electricity) / 1000
+            };
+            
+            // Scope 3 calculations (indirect emissions)
+            const scope3 = {
+                businessTravel: (data.businessTravel * emissionFactors.businessTravel) / 1000,
+                employeeCommute: (data.employeeCommute * data.employees * emissionFactors.employeeCommute) / 1000
+            };
+            
+            const totalScope1 = Object.values(scope1).reduce((a, b) => a + b, 0);
+            const totalScope2 = Object.values(scope2).reduce((a, b) => a + b, 0);
+            const totalScope3 = Object.values(scope3).reduce((a, b) => a + b, 0);
+            const totalEmissions = totalScope1 + totalScope2 + totalScope3;
+            
+            const emissionsPerEmployee = totalEmissions / data.employees;
+            const emissionsPerRevenue = (totalEmissions / data.revenue) * 1000000; // per million USD
+            
+            // Industry comparison
+            const industryBenchmark = industryBenchmarks[data.industry] || 5.0;
+            const benchmarkComparison = emissionsPerEmployee / industryBenchmark;
+            
+            return {
+                scope1, scope2, scope3,
+                totalScope1, totalScope2, totalScope3,
+                totalEmissions, emissionsPerEmployee, emissionsPerRevenue,
+                industryBenchmark, benchmarkComparison,
+                breakdown: {
+                    'Natural Gas': scope1.naturalGas,
+                    'Electricity': scope2.electricity,
+                    'Business Travel': scope3.businessTravel,
+                    'Employee Commuting': scope3.employeeCommute
+                }
+            };
+        }
+
+        function getBenchmarkStatus(ratio) {
+            if (ratio < 0.8) return { class: 'impact-low', text: 'Excellent Performance' };
+            if (ratio < 1.2) return { class: 'impact-medium', text: 'Industry Average' };
+            return { class: 'impact-high', text: 'Above Average' };
+        }
+
+        function displayResults(analysis, data) {
+            const benchmark = getBenchmarkStatus(analysis.benchmarkComparison);
+            
+            // Display key metrics
+            const keyMetricsHTML = `
+                <div class="metric-card">
+                    <div class="metric-value">${analysis.totalEmissions.toFixed(1)}</div>
+                    <div class="metric-label">Total CO₂ Emissions (tons/year)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${analysis.emissionsPerEmployee.toFixed(1)}</div>
+                    <div class="metric-label">CO₂ per Employee (tons/year)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${analysis.emissionsPerRevenue.toFixed(1)}</div>
+                    <div class="metric-label">CO₂ per $1M Revenue (tons)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${((analysis.totalScope3 / analysis.totalEmissions) * 100).toFixed(0)}%</div>
+                    <div class="metric-label">Scope 3 Emissions</div>
+                </div>
+            `;
+            
+            document.getElementById('keyMetrics').innerHTML = keyMetricsHTML;
+
+            // Create emissions chart
+            createEmissionsChart(analysis);
+            
+            // Generate AI recommendations
+            generateRecommendations(analysis, data, benchmark);
+        }
+
+        function createEmissionsChart(analysis) {
+            const ctx = document.getElementById('emissionsChart').getContext('2d');
+            
+            if (emissionsChart) {
+                emissionsChart.destroy();
+            }
+
+            emissionsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Scope 1 (Direct)', 'Scope 2 (Electricity)', 'Scope 3 (Indirect)'],
+                    datasets: [{
+                        data: [analysis.totalScope1, analysis.totalScope2, analysis.totalScope3],
+                        backgroundColor: ['#0d7377', '#14a085', '#329da8'],
+                        borderWidth: 0,
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function generateRecommendations(analysis, data, benchmark) {
+            const recommendations = [];
+            
+            // Get largest emission source
+            const sortedBreakdown = Object.entries(analysis.breakdown)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 2);
+
+            // Generate specific recommendations
+            sortedBreakdown.forEach(([category, value]) => {
+                if (value > 0) {
+                    const rec = getRecommendationForCategory(category, value, analysis.totalEmissions);
+                    if (rec) recommendations.push(rec);
+                }
+            });
+
+            // Add industry-specific recommendation
+            const industryRec = getIndustryRecommendation(data.industry, analysis, benchmark);
+            if (industryRec) recommendations.push(industryRec);
+
+            // Render recommendations
+            const recommendationsHTML = recommendations.map(rec => `
+                <div class="recommendation-item">
+                    <div class="recommendation-header">
+                        <div class="recommendation-title">${rec.title}</div>
+                        <div class="impact-badge ${rec.impact}">${rec.impactText}</div>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 10px;">${rec.description}</p>
+                    <div style="font-size: 0.9em; color: var(--primary-green); font-weight: 600;">
+                        💡 Potential reduction: ${rec.savings} tons CO₂/year | 💵 Implementation: ${rec.cost}
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('recommendationsList').innerHTML = recommendationsHTML;
+        }
+
+        function getRecommendationForCategory(category, value, totalEmissions) {
+            const percentage = ((value / totalEmissions) * 100).toFixed(0);
+            
+            const recommendations = {
+                'Electricity': {
+                    title: 'Renewable Energy Transition',
+                    description: `Electricity accounts for ${percentage}% of your emissions. Consider renewable energy contracts, on-site solar installation, or energy efficiency upgrades.`,
+                    impact: 'impact-high',
+                    impactText: 'High Impact',
+                    savings: (value * 0.75).toFixed(1),
+                    cost: 'Medium-High'
+                },
+                'Business Travel': {
+                    title: 'Travel Optimization Program',
+                    description: `Business travel represents ${percentage}% of your footprint. Implement virtual meeting policies and sustainable travel guidelines.`,
+                    impact: 'impact-medium',
+                    impactText: 'Medium Impact',
+                    savings: (value * 0.4).toFixed(1),
+                    cost: 'Low'
+                },
+                'Employee Commuting': {
+                    title: 'Green Mobility Initiative',
+                    description: `Employee commuting contributes ${percentage}% of emissions. Offer remote work options, public transit subsidies, or EV charging stations.`,
+                    impact: 'impact-medium',
+                    impactText: 'Medium Impact',
+                    savings: (value * 0.5).toFixed(1),
+                    cost: 'Low-Medium'
+                },
+                'Natural Gas': {
+                    title: 'Energy Efficiency Optimization',
+                    description: `Natural gas usage accounts for ${percentage}% of emissions. Upgrade HVAC systems and improve building insulation.`,
+                    impact: 'impact-medium',
+                    impactText: 'Medium Impact',
+                    savings: (value * 0.3).toFixed(1),
+                    cost: 'Medium'
+                }
+            };
+            
+            return recommendations[category] || null;
+        }
+
+        function getIndustryRecommendation(industry, analysis, benchmark) {
+            const industryAdvice = {
+                technology: {
+                    title: 'Cloud Infrastructure Optimization',
+                    description: 'As a technology company, optimize cloud infrastructure and select green data centers to reduce digital carbon footprint.',
+                    impact: 'impact-medium',
+                    impactText: 'Medium Impact',
+                    savings: (analysis.totalEmissions * 0.15).toFixed(1),
+                    cost: 'Low'
+                },
+                manufacturing: {
+                    title: 'Process Electrification Strategy',
+                    description: 'Manufacturing operations benefit from electrifying fossil fuel processes and implementing circular economy principles.',
+                    impact: 'impact-high',
+                    impactText: 'High Impact',
+                    savings: (analysis.totalEmissions * 0.35).toFixed(1),
+                    cost: 'High'
+                },
+                retail: {
+                    title: 'Store Energy Management System',
+                    description: 'Retail operations can significantly reduce emissions through smart building management and sustainable logistics.',
+                    impact: 'impact-medium',
+                    impactText: 'Medium Impact',
+                    savings: (analysis.totalEmissions * 0.25).toFixed(1),
+                    cost: 'Medium'
+                }
+            };
+            
+            return industryAdvice[industry] || {
+                title: 'Industry Best Practices',
+                description: `Your ${industry} sector has opportunities for targeted emission reductions through industry-specific optimization strategies.`,
+                impact: benchmark.class,
+                impactText: benchmark.text,
+                savings: (analysis.totalEmissions * 0.2).toFixed(1),
+                cost: 'Medium'
+            };
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('EcoAI Sustainability Platform loaded successfully');
+        });
+    </script>
+</body>
+</html>
